@@ -150,9 +150,7 @@ app.patch("/patchNote/:noteId", express.json(), async (req, res) => {
 app.delete("/deleteAllNotes", express.json(), async (req, res) => {
   try {
     const collection = db.collection(COLLECTIONS.notes);
-    const data = await collection.deleteMany({
-      _id: ObjectId(insertedId),
-    });
+    const data = await collection.deleteMany({});
 
     res.json({ response: `${data.deletedCount} note(s) deleted.` });
   } catch (error) {
