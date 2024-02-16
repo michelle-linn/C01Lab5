@@ -31,7 +31,7 @@ test("1+2=3, empty array is empty", () => {
     const response = await getNotesResponse.json();
 
     expect(getNotesResponse.status).toBe(200);
-    expect(Array.isArray(response)).toBe(true);
+    expect(Array.isArray(response.response)).toBe(true);
     expect(response.length).toBe(0);
   });
   
@@ -40,7 +40,7 @@ test("1+2=3, empty array is empty", () => {
     const response = await getNotesResponse.json();
 
     expect(getNotesResponse.status).toBe(200);
-    expect(Array.isArray(response)).toBe(true);
+    expect(Array.isArray(response.response)).toBe(true);
     expect(response.length).toBe(2);
   });
   
@@ -71,7 +71,7 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/patchNote - Patch with content and title", async () => {
-    // Request to add a note and get the ID (assuming it returns the ID in the response)
+    // Request to add a note and get the ID
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
@@ -104,7 +104,7 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/patchNote - Patch with just title", async () => {
-    // Request to add a note and get the ID (assuming it returns the ID in the response)
+    // Request to add a note and get the ID
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
@@ -137,7 +137,7 @@ test("1+2=3, empty array is empty", () => {
   
   test("/patchNote - Patch with just content", async () => {
     // Code here
-    // Request to add a note and get the ID (assuming it returns the ID in the response)
+    // Request to add a note and get the ID
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
@@ -169,7 +169,8 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/deleteAllNotes - Delete one note", async () => {
-    // Request to add a note and get the ID (assuming it returns the ID in the response)
+    // Request to add a note and get the ID
+    const addedNotes = []
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
@@ -182,6 +183,7 @@ test("1+2=3, empty array is empty", () => {
     });
 
     const { insertedId } = await addNoteResponse.json();
+    addedNotes.push(insertedId)
 
     // Request to delete the added note
     const deleteNoteResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
@@ -191,7 +193,7 @@ test("1+2=3, empty array is empty", () => {
     const deleteNoteBody = await deleteNoteResponse.json();
 
     expect(deleteNoteResponse.status).toBe(200);
-    expect(deleteNoteBody.response).toBe(`${insertedId} note(s) deleted.`);
+    expect(deleteNoteBody.response).toBe(`${addedNotes.length} note(s) deleted.`);
   });
   
   test("/deleteAllNotes - Delete three notes", async () => {
