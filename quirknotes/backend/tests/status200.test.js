@@ -5,6 +5,15 @@ test("1+2=3, empty array is empty", () => {
 
   const SERVER_URL = "http://localhost:4000";
 
+  beforeEach(async () => {
+    // Delete prior notes before each test
+    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+      method: 'DELETE',
+    });
+    const deleteNotesBody = await deleteNotesResponse.json();
+    expect(deleteNotesResponse.status).toBe(200);
+  });
+
   test("/postNote - Post a note", async () => {
     const title = "NoteTitleTest";
     const content = "NoteTitleContent";
@@ -27,15 +36,6 @@ test("1+2=3, empty array is empty", () => {
   });
 
   test("/getAllNotes - Return list of zero notes for getAllNotes", async () => {
-    // Delete prior patched notes (since Jest does not make tests independent)
-    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
-        method: 'DELETE',
-    });
-
-    const deleteNotesBody = await deleteNotesResponse.json();
-
-    expect(deleteNotesResponse.status).toBe(200);
-
     const getNotesResponse = await fetch(`${SERVER_URL}/getAllNotes`);
     const response = await getNotesResponse.json();
 
@@ -45,15 +45,6 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
-    // Delete prior patched notes (since Jest does not make tests independent)
-    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
-        method: 'DELETE',
-    });
-
-    const deleteNotesBody = await deleteNotesResponse.json();
-
-    expect(deleteNotesResponse.status).toBe(200);
-
     for (let i = 0; i < 2; i++) {
         await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
@@ -199,15 +190,6 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/deleteAllNotes - Delete one note", async () => {
-    // Delete prior patched notes (since Jest does not make tests independent)
-    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
-        method: 'DELETE',
-    });
-
-    const deleteNotesBody = await deleteNotesResponse.json();
-
-    expect(deleteNotesResponse.status).toBe(200);
-
     // Request to add a note and get the ID
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
