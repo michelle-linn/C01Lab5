@@ -37,5 +37,7 @@
               - run: npm install --save-dev jest
               - name: Start server.js
                 run: npm run dev
-                background: true
+              - name: Wait for server to be ready
+                run: |
+                  while ! nc -z localhost 4000; do sleep 1; done
               - run: npm test
