@@ -61,11 +61,11 @@ test("1+2=3, empty array is empty", () => {
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NoteTitleToDelete',
-        content: 'NoteContentToDelete',
+            title: 'NoteTitleToDelete',
+            content: 'NoteContentToDelete',
         }),
     });
 
@@ -87,11 +87,11 @@ test("1+2=3, empty array is empty", () => {
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NoteTitleToPatch',
-        content: 'NoteContentToPatch',
+            title: 'NoteTitleToPatch',
+            content: 'NoteContentToPatch',
         }),
     });
 
@@ -101,11 +101,11 @@ test("1+2=3, empty array is empty", () => {
     const patchNoteResponse = await fetch(`${SERVER_URL}/patchNote/${insertedId}`, {
         method: 'PATCH',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NewNoteTitle',
-        content: 'NewNoteContent',
+            title: 'NewNoteTitle',
+            content: 'NewNoteContent',
         }),
     });
 
@@ -120,11 +120,11 @@ test("1+2=3, empty array is empty", () => {
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NoteTitleToPatch',
-        content: 'NoteContentToPatch',
+            title: 'NoteTitleToPatch',
+            content: 'NoteContentToPatch',
         }),
     });
 
@@ -134,10 +134,10 @@ test("1+2=3, empty array is empty", () => {
     const patchNoteResponse = await fetch(`${SERVER_URL}/patchNote/${insertedId}`, {
         method: 'PATCH',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NewNoteTitle',
+            title: 'NewNoteTitle',
         }),
     });
 
@@ -156,8 +156,8 @@ test("1+2=3, empty array is empty", () => {
         'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NoteTitleToPatch',
-        content: 'NoteContentToPatch',
+            title: 'NoteTitleToPatch',
+            content: 'NoteContentToPatch',
         }),
     });
 
@@ -167,10 +167,10 @@ test("1+2=3, empty array is empty", () => {
     const patchNoteResponse = await fetch(`${SERVER_URL}/patchNote/${insertedId}`, {
         method: 'PATCH',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        content: 'NewNoteContent',
+            content: 'NewNoteContent',
         }),
     });
 
@@ -185,11 +185,11 @@ test("1+2=3, empty array is empty", () => {
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-        title: 'NoteTitleToDelete',
-        content: 'NoteContentToDelete',
+            title: 'NoteTitleToDelete',
+            content: 'NoteContentToDelete',
         }),
     });
 
