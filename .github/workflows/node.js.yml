@@ -18,6 +18,13 @@
           strategy:
               matrix:
                   node-version: [20.x]
+          
+          services:
+              mongodb:
+                  image: mongo
+                  ports:
+                    - 27017:27017
+                  options: --name mongodb
 
           steps:
               - uses: actions/checkout@v3
@@ -28,4 +35,7 @@
                   node-version: ${{ matrix.node-version }}
               - run: npm i
               - run: npm install --save-dev jest
+              - name: Start server.js
+                run: npm dev &
+                background: true
               - run: npm test
