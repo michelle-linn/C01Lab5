@@ -37,7 +37,7 @@ test("1+2=3, empty array is empty", () => {
   
   test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
     for (let i = 0; i < 2; i++) {
-        const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
+        await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -47,8 +47,6 @@ test("1+2=3, empty array is empty", () => {
             content: `NoteContentToDelete${i}`,
         }),
         });
-
-        const { insertedId } = await addNoteResponse.json();
     }
     const getNotesResponse = await fetch(`${SERVER_URL}/getAllNotes`);
     const response = await getNotesResponse.json();
