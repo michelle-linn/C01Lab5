@@ -36,5 +36,5 @@
               - run: npm i
               - run: npm install --save-dev jest
               - name: Start server.js
-                run: npm dev
+                run: npm run dev
               - run: npm test
