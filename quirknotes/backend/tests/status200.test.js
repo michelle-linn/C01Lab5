@@ -32,7 +32,7 @@ test("1+2=3, empty array is empty", () => {
 
     expect(getNotesResponse.status).toBe(200);
     expect(Array.isArray(response.response)).toBe(true);
-    expect(response.length).toBe(0);
+    expect(response.response.length).toBe(0);
   });
   
   test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
@@ -41,7 +41,7 @@ test("1+2=3, empty array is empty", () => {
 
     expect(getNotesResponse.status).toBe(200);
     expect(Array.isArray(response.response)).toBe(true);
-    expect(response.length).toBe(2);
+    expect(response.response.length).toBe(2);
   });
   
   test("/deleteNote - Delete a note", async () => {
@@ -170,7 +170,6 @@ test("1+2=3, empty array is empty", () => {
   
   test("/deleteAllNotes - Delete one note", async () => {
     // Request to add a note and get the ID
-    const addedNotes = []
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
         headers: {
@@ -193,7 +192,7 @@ test("1+2=3, empty array is empty", () => {
     const deleteNoteBody = await deleteNoteResponse.json();
 
     expect(deleteNoteResponse.status).toBe(200);
-    expect(deleteNoteBody.response).toBe(`${addedNotes.length} note(s) deleted.`);
+    expect(deleteNoteBody.response).toBe(`${1} note(s) deleted.`);
   });
   
   test("/deleteAllNotes - Delete three notes", async () => {
