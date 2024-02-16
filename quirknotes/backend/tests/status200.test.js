@@ -61,8 +61,6 @@ test("1+2=3, empty array is empty", () => {
         const { insertedId } = await addNoteResponse.json();
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
     const getNotesResponse = await fetch(`${SERVER_URL}/getAllNotes`);
     const response = await getNotesResponse.json();
 
