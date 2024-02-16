@@ -27,6 +27,15 @@ test("1+2=3, empty array is empty", () => {
   });
 
   test("/getAllNotes - Return list of zero notes for getAllNotes", async () => {
+    // Delete prior patched notes (since Jest does not make tests independent)
+    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: 'DELETE',
+    });
+
+    const deleteNotesBody = await deleteNotesResponse.json();
+
+    expect(deleteNotesResponse.status).toBe(200);
+
     const getNotesResponse = await fetch(`${SERVER_URL}/getAllNotes`);
     const response = await getNotesResponse.json();
 
@@ -36,6 +45,15 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
+    // Delete prior patched notes (since Jest does not make tests independent)
+    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: 'DELETE',
+    });
+
+    const deleteNotesBody = await deleteNotesResponse.json();
+
+    expect(deleteNotesResponse.status).toBe(200);
+
     for (let i = 0; i < 2; i++) {
         await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
@@ -205,11 +223,11 @@ test("1+2=3, empty array is empty", () => {
     const { insertedId } = await addNoteResponse.json();
 
     // Request to delete the added note
-    const deleteNoteResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+    deleteNoteResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
         method: 'DELETE',
     });
 
-    const deleteNoteBody = await deleteNoteResponse.json();
+    deleteNoteBody = await deleteNoteResponse.json();
 
     expect(deleteNoteResponse.status).toBe(200);
     expect(deleteNoteBody.response).toBe(`${1} note(s) deleted.`);
