@@ -49,7 +49,6 @@ test("1+2=3, empty array is empty", () => {
         });
 
         const { insertedId } = await addNoteResponse.json();
-        addedNotes.push(insertedId);
     }
     const getNotesResponse = await fetch(`${SERVER_URL}/getAllNotes`);
     const response = await getNotesResponse.json();
