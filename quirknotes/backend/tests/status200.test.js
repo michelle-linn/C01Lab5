@@ -181,6 +181,15 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/deleteAllNotes - Delete one note", async () => {
+    // Delete prior patched notes (since Jest does not make tests independent)
+    const deleteNotesResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
+        method: 'DELETE',
+    });
+
+    const deleteNotesBody = await deleteNotesResponse.json();
+
+    expect(deleteNotesResponse.status).toBe(200);
+
     // Request to add a note and get the ID
     const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
