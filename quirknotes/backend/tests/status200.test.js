@@ -36,6 +36,21 @@ test("1+2=3, empty array is empty", () => {
   });
   
   test("/getAllNotes - Return list of two notes for getAllNotes", async () => {
+    for (let i = 0; i < 2; i++) {
+        const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: `NoteTitleToDelete${i}`,
+            content: `NoteContentToDelete${i}`,
+        }),
+        });
+
+        const { insertedId } = await addNoteResponse.json();
+        addedNotes.push(insertedId);
+    }
     const getNotesResponse = await fetch(`${SERVER_URL}/getAllNotes`);
     const response = await getNotesResponse.json();
 
@@ -182,7 +197,6 @@ test("1+2=3, empty array is empty", () => {
     });
 
     const { insertedId } = await addNoteResponse.json();
-    addedNotes.push(insertedId)
 
     // Request to delete the added note
     const deleteNoteResponse = await fetch(`${SERVER_URL}/deleteAllNotes`, {
@@ -197,7 +211,6 @@ test("1+2=3, empty array is empty", () => {
   
   test("/deleteAllNotes - Delete three notes", async () => {
     // Add three notes and get their IDs
-    const addedNotes = [];
     for (let i = 0; i < 3; i++) {
         const addNoteResponse = await fetch(`${SERVER_URL}/postNote`, {
         method: 'POST',
@@ -211,7 +224,6 @@ test("1+2=3, empty array is empty", () => {
         });
 
         const { insertedId } = await addNoteResponse.json();
-        addedNotes.push(insertedId);
     }
 
     // Request to delete all notes
@@ -222,7 +234,7 @@ test("1+2=3, empty array is empty", () => {
     const deleteNotesBody = await deleteNotesResponse.json();
 
     expect(deleteNotesResponse.status).toBe(200);
-    expect(deleteNotesBody.response).toBe(`${addedNotes.length} note(s) deleted.`);
+    expect(deleteNotesBody.response).toBe(`${3} note(s) deleted.`);
   });
   
   test("/updateNoteColor - Update color of a note to red (#FF0000)", async () => {
